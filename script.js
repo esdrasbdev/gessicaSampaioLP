@@ -37,28 +37,28 @@
     }
 
     var pausa = false;
-    var ultimoTempo = 0;
     var arrastando = false;
     var origemArrasto = 0;
     var inicioScroll = 0;
+    var meio = carrossel.scrollWidth / 2;
+    var intervalo;
 
-    var animar = function (tempo) {
-      if (!ultimoTempo) {
-        ultimoTempo = tempo;
+    var avancar = function () {
+      if (pausa || document.hidden) return;
+
+      var primeiro = carrossel.querySelector('.depo-print');
+      var passo = primeiro ? primeiro.getBoundingClientRect().width + 20 : 360;
+
+      carrossel.scrollLeft -= passo;
+
+      if (carrossel.scrollLeft <= 0) {
+        carrossel.scrollLeft = meio;
       }
+    };
 
-      var delta = Math.min(tempo - ultimoTempo, 32);
-      ultimoTempo = tempo;
-
-      if (!pausa && !document.hidden) {
-        carrossel.scrollLeft += delta * 0.045;
-
-        if (carrossel.scrollLeft >= carrossel.scrollWidth / 2) {
-          carrossel.scrollLeft = 0;
-        }
-      }
-
-      window.requestAnimationFrame(animar);
+    var iniciarIntervalo = function () {
+      window.clearInterval(intervalo);
+      intervalo = window.setInterval(avancar, 1800);
     };
 
     carrossel.addEventListener('mouseenter', function () { pausa = true; });
@@ -85,13 +85,15 @@
     carrossel.addEventListener('pointerup', function () {
       arrastando = false;
       pausa = false;
+      iniciarIntervalo();
     });
 
     carrossel.addEventListener('pointercancel', function () {
       arrastando = false;
       pausa = false;
+      iniciarIntervalo();
     });
 
-    carrossel.scrollLeft = 0;
-    window.requestAnimationFrame(animar);
+    carrossel.scrollLeft = meio;
+    iniciarIntervalo();
   }
