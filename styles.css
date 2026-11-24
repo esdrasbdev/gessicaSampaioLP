@@ -26,8 +26,9 @@
   /* Cabeçalho */
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #E6EDF5}
   .topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-  .marca{display:flex;align-items:center;gap:10px;text-decoration:none}
-  .marca img{width:40px;height:40px;object-fit:contain}
+  .marca{display:flex;align-items:center;text-decoration:none}
+  .marca picture{display:flex;align-items:center}
+  .marca img{width:clamp(190px,24vw,280px);height:58px;object-fit:contain;object-position:left center}
   .marca span{font-family:'Poppins',sans-serif;font-weight:600;color:var(--azul-escuro);font-size:16px;line-height:1.1}
   .marca small{display:block;font-weight:400;font-size:11px;letter-spacing:.14em;color:var(--dourado-escuro);text-transform:uppercase}
   nav{display:flex;gap:24px;font-size:15px}
@@ -36,7 +37,7 @@
   .topo .btn{padding:11px 18px;font-size:14px}
   @media(max-width:880px){nav{display:none}}
   .topo .btn{white-space:nowrap}
-  @media(max-width:520px){.topo .btn{padding:10px 14px;font-size:13px}.marca span{font-size:15px}}
+  @media(max-width:520px){.topo .btn{padding:10px 14px;font-size:13px}.marca img{width:48px;height:48px;object-fit:contain}.topo{gap:8px}}
 
   /* Abertura */
   .hero{background:linear-gradient(180deg,var(--azul-claro) 0%,#fff 100%);padding:56px 0 72px}
